@@ -1,7 +1,7 @@
 #ifndef C_COMPRESS_ZLIB_H
 #define C_COMPRESS_ZLIB_H
 
-#include <zlib.h>
+#include "zlib.h"
 
 static inline int CCompressZlib_deflateInit2(z_streamp strm,
                                               int level,
