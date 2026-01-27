@@ -269,7 +269,7 @@ public final class ZlibCompressor {
         // some compression algorithms and so it should be used only when necessary. This completes the current deflate block and
         // follows it with an empty stored block that is three bits plus filler bits to the next byte, followed by four bytes
         // (00 00 ff ff)."
-        let bufferSize = Int(CCompressZlib.deflateBound(self.stream, UInt32(from.readableBytes)))
+        let bufferSize = Int(CCompressZlib.deflateBound(self.stream, uLong(from.readableBytes)))
         return bufferSize + 6
     }
 
