@@ -24,8 +24,10 @@ let package = Package(
                 .unsafeFlags(["-I", "C:/Users/missv/Projects/Discord/ScribeSquid/vcpkg_installed/x64-windows/include"], .when(platforms: [.windows]))
             ],
             linkerSettings: [
-                .linkedLibrary("z"),
-                // Windows: link vcpkg zlib
+                // macOS/Linux: link system zlib as 'z'
+                .linkedLibrary("z", .when(platforms: [.macOS, .linux])),
+                // Windows: link vcpkg zlib (named 'zlib' not 'z')
+                .linkedLibrary("zlib", .when(platforms: [.windows])),
                 .unsafeFlags(["-L", "C:/Users/missv/Projects/Discord/ScribeSquid/vcpkg_installed/x64-windows/lib"], .when(platforms: [.windows]))
             ]
         ),
