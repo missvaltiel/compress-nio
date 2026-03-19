@@ -20,7 +20,8 @@ let package = Package(
             name: "CCompressZlib",
             dependencies: [],
             linkerSettings: [
-                .linkedLibrary("z"),
+                .linkedLibrary("z", .when(platforms: [.macOS, .iOS, .tvOS, .linux])),
+                .linkedLibrary("zlib", .when(platforms: [.windows])),
             ]
         ),
         .testTarget(name: "CompressNIOTests", dependencies: ["CompressNIO"]),
