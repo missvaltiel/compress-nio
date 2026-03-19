@@ -8,8 +8,8 @@ let package = Package(
         .library(name: "CompressNIO", targets: ["CompressNIO"]),
     ],
     dependencies: [
-        // Using local swift-nio fork with Windows fixes
-        .package(path: "../swift-nio"),
+        // Using fork with Windows fixes
+        .package(url: "https://github.com/missvaltiel/swift-nio.git", branch: "main"),
     ],
     targets: [
         .target(name: "CompressNIO", dependencies: [
@@ -19,14 +19,8 @@ let package = Package(
         .target(
             name: "CCompressZlib",
             dependencies: [],
-            cSettings: [
-                // Windows: use vcpkg zlib headers
-                .unsafeFlags(["-I", "C:/Users/missv/Projects/Discord/ScribeSquid/vcpkg_installed/x64-windows/include"], .when(platforms: [.windows]))
-            ],
             linkerSettings: [
                 .linkedLibrary("z"),
-                // Windows: link vcpkg zlib
-                .unsafeFlags(["-L", "C:/Users/missv/Projects/Discord/ScribeSquid/vcpkg_installed/x64-windows/lib"], .when(platforms: [.windows]))
             ]
         ),
         .testTarget(name: "CompressNIOTests", dependencies: ["CompressNIO"]),
